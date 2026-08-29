@@ -13,11 +13,11 @@ higher F1 and ~22x faster.
 | **Fuzzy match** | **0.928** | **0.19s** |
 | Embedding match | 0.884 | 4.21s |
 
-**Key result:** the more "sophisticated" AI-based approach did not win.
-Fuzzy matching achieved the highest F1 score, held up across 10
-independent random datasets (not a lucky run), and passed 6 of 7
-adversarial edge-case tests. Full methodology, threshold sweep, robustness
-testing, and honest limitations below.
+**Key result:** Fuzzy matching achieved the highest F1 score, outperforming
+embedding-based matching while running ~22x faster. Performance held
+across 10 independent random datasets and 6 of 7 adversarial edge-case
+tests. Full methodology, threshold sweep, robustness testing, and
+limitations below.
 
 ![Precision vs Recall tradeoff curve](tradeoff_curve.png)
 

@@ -1,0 +1,5 @@
+pandas
+rapidfuzz
+sentence-transformers
+matplotlib
+numpy

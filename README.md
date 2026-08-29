@@ -5,7 +5,7 @@
 ## TL;DR
 
 Fuzzy matching outperformed embedding-based matching on this benchmark —
-higher accuracy AND ~22x faster.
+higher F1 and ~22x faster.
 
 | Method | F1 | Runtime |
 |---|---|---|
@@ -99,12 +99,11 @@ level, it achieves that recall with higher precision than embeddings do.
 This held up across a full threshold sweep, not just one cherry-picked
 setting.
 
-This is a genuinely counterintuitive result worth stating plainly:
-**the more sophisticated, AI-based technique did not win.** For this
-dataset — where most duplicates came from typos and formatting
-inconsistencies rather than nickname-style semantic differences — simple
-character-level comparison was the better tool for the job, and
-dramatically faster (22x).
+Key result: the embedding-based approach did not outperform fuzzy
+matching on this benchmark. For this dataset — where most duplicates came
+from typos and formatting inconsistencies rather than nickname-style
+semantic differences — character-level comparison was the better tool for
+the job, and dramatically faster (22x).
 
 ### Why embeddings struggled here
 

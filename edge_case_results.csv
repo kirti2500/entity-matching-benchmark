@@ -1,0 +1,8 @@
+case,expected,exact,fuzzy (t=85)
+Identical strings,True,✓,✓
+"Same name, DIFFERENT phone (different people)",False,✓,✓
+Phone formatting difference only,True,✗ WRONG,✓
+Single-character typo,True,✗ WRONG,✓
+Missing/empty last name,True,✗ WRONG,✗ WRONG
+Completely unrelated people,False,✓,✓
+Short name / initials,True,✗ WRONG,✓

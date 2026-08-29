@@ -2,6 +2,27 @@
 
 **By Kirti Gupta**
 
+## TL;DR
+
+Fuzzy matching outperformed embedding-based matching on this benchmark —
+higher accuracy AND ~22x faster.
+
+| Method | F1 | Runtime |
+|---|---|---|
+| Exact match | 0.104 | 0.006s |
+| **Fuzzy match** | **0.928** | **0.19s** |
+| Embedding match | 0.884 | 4.21s |
+
+**Key result:** the more "sophisticated" AI-based approach did not win.
+Fuzzy matching achieved the highest F1 score, held up across 10
+independent random datasets (not a lucky run), and passed 6 of 7
+adversarial edge-case tests. Full methodology, threshold sweep, robustness
+testing, and honest limitations below.
+
+![Precision vs Recall tradeoff curve](tradeoff_curve.png)
+
+---
+
 How do you actually know one duplicate-detection method is better than
 another — not just "it feels more accurate," but with a real, measurable
 number? This project builds three different strategies for detecting
@@ -49,8 +70,6 @@ variants. Most systems handle this with a naive exact-match join, which
 | Exact match (baseline) | — | 100.00% | 5.47% | 0.104 | 0.006s |
 | **Fuzzy match** | **85** | **97.20%** | **88.69%** | **0.9275** | 0.19s |
 | Embedding match | 80 | 89.22% | 87.59% | 0.8840 | 4.21s |
-
-![Precision vs Recall tradeoff curve](tradeoff_curve.png)
 
 ## Robustness check: does this hold across different random datasets?
 
@@ -197,3 +216,16 @@ python edge_cases.py                 # adversarial hand-crafted test suite
 
 Python · pandas · rapidfuzz · sentence-transformers (`all-MiniLM-L6-v2`) ·
 matplotlib
+
+## What I'd improve next
+
+The current benchmark uses exhaustive pairwise comparison (O(n²)), so the
+natural next step is candidate generation / blocking — e.g. only comparing
+records within the same city — to make this scale to real production
+volumes of millions of records rather than hundreds. I'd also expand the
+benchmark with different noise profiles, especially nickname-heavy data,
+since the current results favor fuzzy matching specifically because of
+this synthetic dataset's noise characteristics (mostly typos and
+formatting issues) — a dataset weighted toward nickname-style variation
+would be a fairer test of embeddings' actual strength.
+
